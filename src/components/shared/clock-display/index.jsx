@@ -1,4 +1,5 @@
-const ClockDisplay =({date,title,timeZone,offset})=>{
+import {format} from 'date-fns'
+const ClockDisplay =({date,title,timezone,offset})=>{
 
 
   const offsetHr = offset / 60
@@ -6,9 +7,12 @@ const ClockDisplay =({date,title,timeZone,offset})=>{
 return (
         <div>
             <h1>Title:{title}</h1> 
-             <h3>{date.toString()}</h3> 
+             <h3>{format(date,"yyyy-MM-dd hh:mm.ss aaaaa'm'")}</h3> 
             <p>
-                 {timeZone}{offsetHr < 0 ? ` +${Math.abs(offsetHr)}`:` -${Math.abs(offsetHr)}`}
+                 {timezone}
+                 {offsetHr > 0 
+                 ? `+${Math.abs(offsetHr)}`
+                 : `-${Math.abs(offsetHr)}`}
                 </p>
         </div>
     )
