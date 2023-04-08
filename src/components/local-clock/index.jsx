@@ -12,7 +12,9 @@ const LocalClock = ({clock,updateClock}) => {
       timezone,
       offset,
     });
-  },[date])
+  },[date,])
+
+  // console.log(timezone);
 
   return (
     <div>
@@ -25,8 +27,8 @@ const LocalClock = ({clock,updateClock}) => {
        />
       )}
       
-      
-       <ClockActions local={true} clock={clock}/>
+     
+       <ClockActions local={true} clock={clock} updateClock={updateClock}/> 
         <h1>i am local clock</h1>
     </div>
   )

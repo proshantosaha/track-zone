@@ -16,6 +16,7 @@ const LOCAL_CLOCK_INIT ={
     date:null,
 }
 
+// console.log(timezone);
 export default function App() {
   
   const [localClock,setLocalClock] = useState({...LOCAL_CLOCK_INIT});
@@ -32,7 +33,7 @@ export default function App() {
     <>
       <CssBaseline />
       <Container>
-        <h2> ooo hello</h2>
+        {/* <h2> ooo hello</h2> */}
         
         <LocalClock
            updateClock={updateLocalClock}

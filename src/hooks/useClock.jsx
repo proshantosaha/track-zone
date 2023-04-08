@@ -11,7 +11,6 @@ const TIMEZONE_OFFSET = {
   MST: -6 * 60,
 }
 const useClock = (timezone,offset) => {
-  // const [state,useState] = useState({...init});
   const [localDate,setLocalDate] = useState(null);
   const [localOffset, setLocalOffset] = useState(0)
   const [localTimeZone, setlocalTimeZone] = useState('')
@@ -21,7 +20,6 @@ const useClock = (timezone,offset) => {
     let d = new Date()
     const lo  = d.getTimezoneOffset();
     d = addMinutes(d,lo);
-    // console.log(d.toLocaleString());
   
     setUTC(d);
 
@@ -38,7 +36,8 @@ const useClock = (timezone,offset) => {
       }
       else{
         const newUtc = addMinutes(utc,-localOffset);
-        const dateStrArr = newUtc.toUTCString().split('');
+        const dateStrArr = newUtc.toUTCString().split(' ');
+        // console.log(dateStrArr);
        setLocalDate(newUtc);
        setlocalTimeZone(dateStrArr.pop());
 
@@ -48,7 +47,7 @@ const useClock = (timezone,offset) => {
      
     }
    
-  },[utc]);
+  },[utc,timezone,offset]);
 
 
 
