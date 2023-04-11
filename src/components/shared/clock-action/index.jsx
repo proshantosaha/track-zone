@@ -18,17 +18,7 @@ const defaultOffset = [
 const ClockActions = ({local = false, clock,updateClock}) =>{
     const [isEdit, setIsEdit] = useState(false)
 
-    // const handleChange =(e)=>{
-    //     let {name , value} = e.target
-
-    //     if(name === 'offset'){
-    //         value = Number(value) * 60
-    //     }
-    //     updateClock({
-    //         [name]:value
-    //     })
- 
-    // }  
+    
 
     return(
        
@@ -42,7 +32,7 @@ const ClockActions = ({local = false, clock,updateClock}) =>{
                 <ClockFrom
                 values={clock}
                 handleClock={updateClock}
-                title={!local}
+                // title={!local}
                 edit={true}
                 
                 />
@@ -75,15 +65,7 @@ export default ClockActions
 //              <option value='UTC'>UTC</option>
 //              <option value='BST'>BST</option>
 //          </select>
-//          {(clock.timezone === 'GMT' || clock.timezone === 'UTC')
-//            &&(
-//              <select name='offset' value={clock.offset/60} onChange={handleChange}>
-             
-//                  {defaultOffset.map((offset)=>(
-//                      <option key={offset} value={offset}></option>
-//                  ))}
-//              </select>
-//          )}
-//          {/* <input type="number" value={clock.offset /60} onChange={handleChange}/> */}
+        
+         {/* <input type="number" value={clock.offset /60} onChange={handleChange}/> */}
      
 //      </div>

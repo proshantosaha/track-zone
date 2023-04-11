@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {getOffset} from '../../../utilis/timeZone'
 /**
  * 1. for local clock title won't be change
  * 2. to create a new clock we have to create , title ,timezone ,offset,
@@ -13,13 +14,19 @@ import {useState} from 'react'
 const ClockFrom = ({values, handleClock, title=true, edit=false}) =>{
     const [formValues,setFormValues] = useState({...values})
 
+ 
+
     const handleChange =(e)=>{
-        const {name,value} = e.target
-        setFormValues({
-            ...formValues,
-            [name]:value
-        })
-    }
+            let {name , value} = e.target
+    
+            if(name === 'offset'){
+                value = Number(value) * 60
+            }
+            setFormValues((prev)=>({
+                ...prev,
+                [name]:value,
+            }))
+        }  
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -35,6 +42,7 @@ const ClockFrom = ({values, handleClock, title=true, edit=false}) =>{
                     id="title" 
                     value={formValues.title}
                     onChange={handleChange}
+                     disabled={!title}
                  />
             </div>
 
@@ -47,21 +55,38 @@ const ClockFrom = ({values, handleClock, title=true, edit=false}) =>{
                     id="timezone" 
                     value={formValues.timezone}
                     onChange={handleChange}
+               
                  />
             </div>
 
-            <div>
-                <label htmlFor="offset">Enter Offset</label>
-                <input 
-                    type="text" 
-                    name="offset" 
-                    id="offset" 
-                    value={formValues.offset}
-                    onChange={handleChange}
-                    disabled={!title}
-                 />
-            </div>
+            {(formValues.timezone === 'GMT' || formValues.timezone === 'UTC')
+            &&(
+                <div>
+                    <label htmlFor="offset">Enter Offset</label>
+                    <input 
+                        type="text" 
+                        name="offset" 
+                        id="offset" 
+                        value={formValues.offset}
+                        onChange={handleChange}
+                    
+                    />
+                
+                    <select
+                        name='offset' 
+                        value={formValues.offset/60}
+                        onChange={handleChange}>
+                    
+                        {getOffset().map((offset)=>(
+                            <option 
+                                key={offset} 
+                                value={offset}>
 
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            )}
             <button>{edit ? "update" : "create"}</button>
         </form>
     )
