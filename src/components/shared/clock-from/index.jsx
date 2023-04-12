@@ -11,7 +11,16 @@ import {getOffset} from '../../../utilis/timeZone'
 //     offset:0,
 // }
 
-const ClockFrom = ({values, handleClock, title=true, edit=false}) =>{
+const ClockFrom = ({
+     values={
+        title:'',   
+        timezone:'',
+        offset:'',
+        }, 
+            handleClock,
+            title=true,
+            edit=false}) =>{
+   
     const [formValues,setFormValues] = useState({...values})
 
  
@@ -30,7 +39,7 @@ const ClockFrom = ({values, handleClock, title=true, edit=false}) =>{
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        handleClock(formValues )
+        handleClock(formValues);
     }
     return(
         <form onSubmit={handleSubmit}>
@@ -42,45 +51,46 @@ const ClockFrom = ({values, handleClock, title=true, edit=false}) =>{
                     id="title" 
                     value={formValues.title}
                     onChange={handleChange}
-                     disabled={!title}
+                    
+                  
                  />
             </div>
 
 
             <div>
                 <label htmlFor="timezone">Enter timezone</label>
-                <input 
-                    type="text" 
-                    name="timezone" 
-                    id="timezone" 
+                 <select 
+                    name="timezone"
                     value={formValues.timezone}
                     onChange={handleChange}
-               
-                 />
+                    >
+
+                    <option value='GMT'>GMT</option>
+                    <option value='PST'>PST</option>
+                    <option value='EST'>EST</option>
+                    <option value='MST'>MST</option>
+                    <option value='EDT'>EDT</option> 
+                    <option value='UTC'>UTC</option>
+                    <option value='BST'>BST</option>
+                </select>
             </div>
 
             {(formValues.timezone === 'GMT' || formValues.timezone === 'UTC')
             &&(
                 <div>
                     <label htmlFor="offset">Enter Offset</label>
-                    <input 
-                        type="text" 
-                        name="offset" 
-                        id="offset" 
-                        value={formValues.offset}
-                        onChange={handleChange}
-                    
-                    />
                 
                     <select
-                        name='offset' 
-                        value={formValues.offset/60}
-                        onChange={handleChange}>
-                    
+                      name="offset" 
+                      id="offset" 
+                      value={formValues.offset/60}
+                      onChange={handleChange}
+                    >
                         {getOffset().map((offset)=>(
                             <option 
                                 key={offset} 
                                 value={offset}>
+                                    {offset }
 
                             </option>
                         ))}

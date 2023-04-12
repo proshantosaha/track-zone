@@ -4,4 +4,7 @@ export const getOffset = (start=-11.5,ending=12)=>{
         offsets.push(i)
     }
     return offsets;
+
 }
+
+

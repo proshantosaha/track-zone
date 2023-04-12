@@ -17,8 +17,11 @@ const defaultOffset = [
 
 const ClockActions = ({local = false, clock,updateClock}) =>{
     const [isEdit, setIsEdit] = useState(false)
+    const [isCreate, seIsCreate] = useState(false )
 
-    
+    const handleClock =(values)=>{
+        console.log(values);
+    }
 
     return(
        
@@ -27,15 +30,33 @@ const ClockActions = ({local = false, clock,updateClock}) =>{
             {/* <h2>i am action </h2> */}
             <button onClick={()=> setIsEdit(!isEdit)}>Edit</button>
 
-            {local ? <button>create</button> : <button>delete</button>}
+            {local ? <button onClick={()=>seIsCreate(!isCreate)}>create</button> : <button>delete</button>}
             {isEdit && ( 
-                <ClockFrom
-                values={clock}
-                handleClock={updateClock}
-                // title={!local}
-                edit={true}
-                
-                />
+                <>
+                <h3>Edit Clock</h3>
+                    <ClockFrom
+                        values={clock}
+                        handleClock={updateClock}
+                        // title={!local}
+                        edit={true}
+                    
+                    />
+                </>
+               
+           
+            )}
+            {isCreate && ( 
+                <>
+                <h3>Create a Clock</h3>
+                    <ClockFrom
+                    
+                        handleClock={updateClock}
+                        // title={true}
+                        // edit={true}
+                    
+                    />
+                </>
+               
            
             )}
         </div>
@@ -56,15 +77,7 @@ export default ClockActions
 //
 //     <div>
 //          <input name='title' type='text' value={clock.title} onChange={handleChange}/>
-//          <select name="timezone" value={clock.timezone} onChange={handleChange}>
-//              <option value='GMT'>GMT</option>
-//              <option value='PST'>PST</option>
-//              <option value='EST'>EST</option>
-//              <option value='MST'>MST</option>
-//              <option value='EDT'>EDT</option> 
-//              <option value='UTC'>UTC</option>
-//              <option value='BST'>BST</option>
-//          </select>
+         
         
          {/* <input type="number" value={clock.offset /60} onChange={handleChange}/> */}
      
