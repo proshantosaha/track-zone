@@ -6,7 +6,7 @@ const ClockDisplay =({date,title,timezone,offset})=>{
   const offsetHr = offset / 60;
 
 return (
-        <div >
+        <div className={classes.card}>
             <h1>Title:{title}</h1> 
              <h3>{format(date, "yyyy-MM-dd hh:mm.ss aaaaa'm'")}</h3> 
             <p>
