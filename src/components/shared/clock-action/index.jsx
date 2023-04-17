@@ -15,12 +15,13 @@ const defaultOffset = [
 ]
 // console.log(defaultOffset);
 
-const ClockActions = ({local = false, clock,updateClock}) =>{
+const ClockActions = ({local = false, clock,updateClock,createClock}) =>{
     const [isEdit, setIsEdit] = useState(false)
     const [isCreate, seIsCreate] = useState(false )
 
     const handleClock =(values)=>{
-        console.log(values);
+        createClock(values);
+        // console.log(values);
     }
 
     return(
@@ -50,7 +51,7 @@ const ClockActions = ({local = false, clock,updateClock}) =>{
                 <h3>Create a Clock</h3>
                     <ClockFrom
                     
-                        handleClock={updateClock}
+                        handleClock={handleClock}
                         // title={true}
                         // edit={true}
                     

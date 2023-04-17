@@ -1,5 +1,6 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {getOffset} from '../../../utilis/timeZone'
+import { TIMEZONE_OFFSET} from '../../../constants/timeZone'
 /**
  * 1. for local clock title won't be change
  * 2. to create a new clock we have to create , title ,timezone ,offset,
@@ -23,7 +24,14 @@ const ClockFrom = ({
    
     const [formValues,setFormValues] = useState({...values})
 
- 
+                useEffect(()=>{
+                   if(TIMEZONE_OFFSET[formValues.timezone]){
+                    setFormValues(prev=>({
+                        ...prev,
+                        offset:TIMEZONE_OFFSET[formValues.timezone],
+                    }))
+                   }
+                },[formValues.timezone])
 
     const handleChange =(e)=>{
             let {name , value} = e.target

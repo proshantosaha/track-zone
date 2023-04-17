@@ -1,5 +1,6 @@
 // import { Checkbox } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import {generate} from 'shortid'
 import { Container } from '@mui/system';
 import LocalClock from './components/local-clock';
 import ClockList from './components/clock-list';
@@ -20,6 +21,8 @@ const LOCAL_CLOCK_INIT ={
 export default function App() {
   
   const [localClock,setLocalClock] = useState({...LOCAL_CLOCK_INIT});
+
+  const [clocks,setClocks] = useState([])
   
   const updateLocalClock =(data)=>{
       setLocalClock({
@@ -28,6 +31,12 @@ export default function App() {
       })
   }
   
+  const createClock=(clock)=>{
+     clock.id = generate();
+     setClocks([...clocks,clock]);
+  }
+
+
 
   return (
     <>
@@ -38,9 +47,13 @@ export default function App() {
         <LocalClock
            updateClock={updateLocalClock}
            clock={localClock}
+           createClock={createClock}
            />
         
-        <ClockList/>
+        <ClockList
+         clocks={clocks}
+        
+        />
 
         {/* <Checkbox/> */}
       </Container>
