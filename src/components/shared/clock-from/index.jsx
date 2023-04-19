@@ -18,7 +18,7 @@ const ClockFrom = ({
         timezone:'',
         offset:'',
         }, 
-            handleClock,
+            handleClock, 
             title=true,
             edit=false}) =>{
    

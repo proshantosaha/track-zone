@@ -15,7 +15,7 @@ const defaultOffset = [
 ]
 // console.log(defaultOffset);
 
-const ClockActions = ({local = false, clock,updateClock,createClock}) =>{
+const ClockActions = ({local = false, clock,updateClock,createClock,deleteClock}) =>{
     const [isEdit, setIsEdit] = useState(false)
     const [isCreate, seIsCreate] = useState(false )
 
@@ -31,7 +31,7 @@ const ClockActions = ({local = false, clock,updateClock,createClock}) =>{
             {/* <h2>i am action </h2> */}
             <button onClick={()=> setIsEdit(!isEdit)}>Edit</button>
 
-            {local ? <button onClick={()=>seIsCreate(!isCreate)}>create</button> : <button>delete</button>}
+            {local ? <button onClick={()=>seIsCreate(!isCreate)}>create</button> : <button onClick={()=>deleteClock(clock.id)}>delete</button>}
             {isEdit && ( 
                 <>
                 <h3>Edit Clock</h3>

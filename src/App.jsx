@@ -37,6 +37,22 @@ export default function App() {
   }
 
 
+  const updateClock = (updatedClock) =>{
+    const updatedClocks =  clocks.map((clock)=>{
+        if (clock.id === updatedClock.id)
+        return updatedClock;
+        return clock;
+      });
+
+      setClocks(updatedClocks)
+  }
+
+
+  const deleteClock =(id)=>{
+    const updatedClocks = clocks.filter(clock=>clock.id !== id)
+    setClocks(updatedClocks)
+  }
+
 
   return (
     <>
@@ -51,7 +67,11 @@ export default function App() {
            />
         
         <ClockList
+         localClock={localClock.date}
          clocks={clocks}
+         updateClock={updateClock}
+          deleteClock={deleteClock}
+      
         
         />
 

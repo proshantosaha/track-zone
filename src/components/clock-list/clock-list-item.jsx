@@ -1,8 +1,9 @@
+import { formatDistance } from "date-fns"; 
 import useClock from "../../hooks/useClock";
 import ClockActions from "../shared/clock-action";
 import ClockDisplay from "../shared/clock-display";
 
-const ClockListItem =({clock,})=>{
+const ClockListItem =({clock,localClock,updateClock,deleteClock})=>{
 
     const {date} = useClock(clock.timezone,clock.offset);
     
@@ -19,8 +20,15 @@ const ClockListItem =({clock,})=>{
             
         />
 
-
-      
+        <h3>{formatDistance(localClock,date)}</h3>
+        
+        <ClockActions
+        clock={clock}
+        updateClock={updateClock}
+        deleteClock={deleteClock}
+        />
+        
+        
         </div>
        
 
