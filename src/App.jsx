@@ -4,7 +4,9 @@ import {generate} from 'shortid'
 import { Container } from '@mui/system';
 import LocalClock from './components/local-clock';
 import ClockList from './components/clock-list';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useEvents from './hooks/useEvent';
+import useTimer from './hooks/useTimer';
 // import useClock from './hooks/useClock';
 
 
@@ -22,7 +24,18 @@ export default function App() {
   
   const [localClock,setLocalClock] = useState({...LOCAL_CLOCK_INIT});
 
+
   const [clocks,setClocks] = useState([])
+  const {getEvents,getEventsByClockId,addEvent,events } = useEvents()
+
+  useEffect (()=>{
+    if(Object.keys(events).length===0){
+      const event = addEvent({title : 'Test', clockId : ' Clock-222'});
+    }
+    
+   
+
+  },[events])
   
   const updateLocalClock =(data)=>{
       setLocalClock({
@@ -61,8 +74,8 @@ export default function App() {
         {/* <h2> ooo hello</h2> */}
         
         <LocalClock
-           updateClock={updateLocalClock}
-           clock={localClock}
+            clock={localClock}
+           updateClock={updateLocalClock }
            createClock={createClock}
            />
         
